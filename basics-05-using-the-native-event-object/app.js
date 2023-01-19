@@ -2,8 +2,28 @@ const app = Vue.createApp({
   data() {
     return {
       counter: 0,
-      name: ''
+      name: '',
+      fullname: '',
     };
+  },
+  watch: {
+    name(value){
+      if(value === ''){
+        this.fullname = '';
+      }else{
+        this.fullname = value + ' ' + 'Rahman';
+      }
+      
+    }
+  },
+  computed: {
+    // fullname(){
+    //   console.log('Running Again..');
+    //   if (this.name === ''){
+    //     return '';
+    //   }
+    //   return this.name + ' ' + 'Rahman';
+    // }
   },
   methods: {
     outputFullname() {
