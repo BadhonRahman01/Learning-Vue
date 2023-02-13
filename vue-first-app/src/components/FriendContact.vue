@@ -1,46 +1,84 @@
 <template>
-    <li>
-        <h2>{{ friend.name }}</h2>
-        <button @click="toogleDetails">{{ detailsAreVisible ? 'Hide' : 'Show' }} Details</button>
-        <ul v-if="detailsAreVisible">
-            <li><strong>Phone:</strong>{{ friend.phone }}</li>
-            <li><strong>Email:</strong>{{ friend.email }}</li>
-        </ul>
-    </li>
+  <li>
+    <h2>{{ name }} {{ isFavourite ? "(Favourite)" : "" }}</h2>
+    <button @click="toogleFav">Toggle Favourite</button>
+    <button @click="toogleDetails">
+      {{ detailsAreVisible ? "Hide" : "Show" }} Details
+    </button>
+    <ul v-if="detailsAreVisible">
+      <li><strong>Phone:</strong>{{ phoneNumber }}</li>
+      <li><strong>Email:</strong>{{ emailAddress }}</li>
+    </ul>
+  </li>
 </template>
 
 
 <script>
 export default {
-     data(){
-        return{
-            detailsAreVisible: false,
-            friend:         
-                   {
-                    id:'manuel',
-                    name: 'Manuel Lorenz',
-                    phone: '0123456789',
-                    email: 'manuel@localhost.com',
-                },
-        };
-     },
-     methods: {
-        toggleDetails(){
-            this.detailsAreVisible = !this.detailsAreVisible;
-        }
-     }
+  // props: ["name", "phoneNumber", "emailAddress", "isFavourite"],
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    phoneNumber:{
+      type: String,
+      required: true,
+    },
+    emailAddress: {
+      type: String,
+      required: true,
+    },
+    isFavourite: {
+      type: Boolean,
+      required: false,
+      default: false,
+      // validator: function (value) {
+      //   return value === '1' || value === '0';
+      // }
+    },
+  },
+  emits: ['toggle-favourite'],
+  // emits: {
+  //     'toggle-favourite': function (id) {
+  //       if(id){
+  //         return true;
+  //       }else{
+  //         console.warn('ID Missing!');
+  //         return false;
+  //       }
+  //     },
+  // },
+  data() {
+    return {
+      detailsAreVisible: false
+    };
+  },
+  methods: {
+    toogleDetails() {
+      this.detailsAreVisible = !this.detailsAreVisible;
+    },
+    toogleFav() {
+      // this.friendIsFavourite = !this.friendIsFavourite;
+      this.$emit('toggle-favorite', this.id);
+    },
+  },
 };
 </script>
 
 
 <style >
-@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-family: 'Jost', sans-serif;
+  font-family: "Jost", sans-serif;
 }
 
 body {
@@ -98,5 +136,4 @@ header {
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
-
 </style>
