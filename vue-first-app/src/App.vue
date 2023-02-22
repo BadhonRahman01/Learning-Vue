@@ -14,6 +14,7 @@
         :email-address="friend.email"
         :is-favourite="friend.isFavourite"
         @toggle-favorite="toggleFavouriteStatus"
+        @delete="deleteContact"
         ></friend-contact>
         <!-- <friend-contact
         name="Badhon Lorenz"
@@ -63,6 +64,9 @@ export default {
                 isFavourite: false
             }
             this.friends.push(newFriendContact);
+        },
+        deleteContact(friendId){
+            this.friends = this.friends.filter((friend) =>friend.id !== friendId);
         }
     }
 };
