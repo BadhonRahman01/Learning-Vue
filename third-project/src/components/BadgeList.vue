@@ -1,6 +1,8 @@
 <template>
   <section>
-    <h2>Available Badges</h2>
+    <base-card>
+
+    <template v-slot:default>
     <ul>
       <li>
         <base-badge type="admin" caption="ADMIN"></base-badge>
@@ -9,6 +11,8 @@
         <base-badge type="author" caption="AUTHOR"></base-badge>
       </li>
     </ul>
+    </template>
+  </base-card>
   </section>
 </template>
 
