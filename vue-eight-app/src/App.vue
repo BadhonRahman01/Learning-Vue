@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <!-- <div class="container">
     <div class="block" :class="{ animate: animatedBlock }"></div>
     <button @click="animateBlock">Animate</button>
   </div>
@@ -35,15 +35,23 @@
   </div>
   <div class="container">
     <users-data></users-data>
-  </div>
+  </div> -->
+
+  <router-view v-slot="slotProps">
+    <transition name="buttons-fade" mode="out-in">
+      <component :is="slotProps.Component"></component>
+    </transition>
+  </router-view>
+
+
 </template>  
 
 <script>
-import UsersData from "./components/UsersData.vue";
+// import UsersData from "./components/UsersData.vue";
 export default {
-  components: {
-    UsersData,
-  },
+  // components: {
+  //   UsersData,
+  // },
   data() {
     return {
       animatedBlock: false,
@@ -187,7 +195,18 @@ button:active {
 .buttons-fade-leave-from {
   opacity: 1;
 }
+.route-enter-from{
 
+}
+.route-enter-active{
+  animation: slide-scale 0.5s ease-out;
+}
+.route-enter-to{
+
+}
+.route-leave-active{
+  animation: slide-scale 0.5s ease-in;
+}
 /* @keyframes modal {
   from{
    opacity: 0;

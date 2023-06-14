@@ -11,7 +11,7 @@ export default {
         // this.$store.dispatch('increment'); // 'increment' is the name of the mutation';
         // },
         // ...mapActions(['increment', 'increase']),
-        ...mapActions({
+        ...mapActions('numbers',{ 
             inc: 'increment',
             increase: 'increase',
         }),
